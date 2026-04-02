@@ -95,6 +95,7 @@ else
     sudo apt update -y -qq > /dev/null 2>&1
     sudo apt install -y -qq chromium > /dev/null 2>&1
 fi
+
 # Step 2: Clone the repo with submodules
 if [[ -d "$CLONE_DIR/.git" ]]; then
     log "Repository exists at $CLONE_DIR, pulling..."
@@ -106,7 +107,7 @@ else
 fi
 
 # Paths into submodule
-SUBMODULE_LINUX_DIR="$CLONE_DIR/ufr-browser_extensions/Chrome/Host/data/Linux"
+SUBMODULE_LINUX_DIR="$CLONE_DIR/ufr-browser_extensions/browser_extensions/Chrome/Host/data/Linux"
 
 if [[ ! -d "$SUBMODULE_LINUX_DIR" ]]; then
     die "Expected directory not found: $SUBMODULE_LINUX_DIR — repo structure may have changed."
