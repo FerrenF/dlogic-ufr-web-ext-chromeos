@@ -36,10 +36,11 @@ Instead I have a set of instructions or a script, so do which every you please:
 
 ## 1. Linux Development Environment   
 
-Go to Settings -> About ChromeOS -> Scroll down to the bottom and toggle Linux Development Environment on.
-It display a modal as it downloads the container image. After it's done, a terminal should open displaying your chosen username at the commandline. Type 'lsusb' to ensure that you are in the correct shell. Your RFID reader will not appear here yet.
+Go to Settings -> About ChromeOS -> Scroll down to the bottom and setup the Linux Development Environment.
+It display a modal to confirm and download the container image. After it's done, a terminal should open displaying your chosen username at the commandline. Type 'lsusb' to ensure that you are in the correct shell. Your RFID reader will not appear here yet.
 
-<img  height="300" alt="image" src="https://github.com/user-attachments/assets/a10b3fb2-6702-431e-8041-8dce7ba55c2f" />
+<img  height="300" alt="image" src="https://github.com/user-attachments/assets/0971d686-f8ed-4da7-bf35-18246a67119f" />
+
 
 ## 2. Share USB with Linux
 
