@@ -57,6 +57,8 @@ Go back to your terminal
 
 The script expects Python3 to be available. This should be true on most chromeOS installations. If the repo is current, then it should work out of the box. If not, then the extension ID may need to be adjusted.
 
+You will need to specify the username that you set up in the linux development environment as a parameter. An example is below
+
 ## 3. Run the script
 
 ```
@@ -64,7 +66,7 @@ The script expects Python3 to be available. This should be true on most chromeOS
 chmod +x install-chromium-chromeos.sh
 
 # Pasted in to an arbitrary script
-./install-chromium-chromeos.sh
+./install-chromium-chromeos.sh --user username
 ```
 This should be everything you need to do in the container. 
 Look for your new chromium installation, open it

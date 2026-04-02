@@ -4,9 +4,10 @@
 # Silent by default. Pass --verbose for output.
 #
 # Usage:
-#   ./install-chromium-chromeos.sh [OPTIONS]
+#   ./install-chromium-chromeos.sh --user <username> [OPTIONS]
 #
 # Options:
+#   --user <username>       (Required) Target user whose Chromium config will be modified.
 #   --extension-id <id>     Chrome extension ID for allowed_origins.
 #                           Default: kjfmmgpfhdohhcodbkaodgkidbenkgog
 #   --skip-chromium         Skip Chromium installation.
@@ -16,13 +17,13 @@
 #
 
 set -euo pipefail
-USER=$(whoami)
+
+TARGET_USER=""
 EXTENSION_ID="kjfmmgpfhdohhcodbkaodgkidbenkgog"
 SKIP_CHROMIUM=false
 CLONE_DIR="./dlogic-ufr-web-ext-chromeos"
 VERBOSE=false
 REPO_URL="https://github.com/FerrenF/dlogic-ufr-web-ext-chromeos.git"
-NATIVE_MSG_DIR="/home/$USER/.config/chromium/NativeMessagingHosts"
 HOST_BINARY_DEST="/usr/local/bin/ufr"
 MANIFEST_FILES=(
     "ufr.dlogic.chrome.json"
@@ -37,6 +38,10 @@ usage() {
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
+        --user)
+            TARGET_USER="$2"
+            shift 2
+            ;;
         --extension-id)
             EXTENSION_ID="$2"
             shift 2
@@ -73,6 +78,19 @@ die() {
     echo "ERROR: $*" >&2
     exit 1
 }
+
+if [[ -z "$TARGET_USER" ]]; then
+    echo "Error: --user is required." >&2
+    echo "Usage: ./install-chromium-chromeos.sh --user <username>" >&2
+    exit 1
+fi
+
+TARGET_HOME="/home/$TARGET_USER"
+if [[ ! -d "$TARGET_HOME" ]]; then
+    die "Home directory not found: $TARGET_HOME"
+fi
+
+NATIVE_MSG_DIR="$TARGET_HOME/.config/chromium/NativeMessagingHosts"
 
 detect_arch() {
     local machine
@@ -115,6 +133,7 @@ fi
 
 # Step 3: Create NativeMessagingHosts directory
 mkdir -p "$NATIVE_MSG_DIR"
+chown "$TARGET_USER:$TARGET_USER" "$NATIVE_MSG_DIR"
 
 # Step 4: Copy and patch manifest files
 ALLOWED_ORIGINS_JSON="[\"chrome-extension://${EXTENSION_ID}/\"]"
@@ -140,6 +159,7 @@ with open(sys.argv[3], 'w') as f:
 " "$src" "$ALLOWED_ORIGINS_JSON" "$dest"
 
     chmod 755 "$dest"
+    chown "$TARGET_USER:$TARGET_USER" "$dest"
 }
 
 for manifest_file in "${MANIFEST_FILES[@]}"; do
