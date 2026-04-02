@@ -16,13 +16,13 @@
 #
 
 set -euo pipefail
-
+USER=$(whoami)
 EXTENSION_ID="kjfmmgpfhdohhcodbkaodgkidbenkgog"
 SKIP_CHROMIUM=false
 CLONE_DIR="./dlogic-ufr-web-ext-chromeos"
 VERBOSE=false
 REPO_URL="https://github.com/FerrenF/dlogic-ufr-web-ext-chromeos.git"
-NATIVE_MSG_DIR="~/.config/chromium/NativeMessagingHosts"
+NATIVE_MSG_DIR="/home/$USER/.config/chromium/NativeMessagingHosts"
 HOST_BINARY_DEST="/usr/local/bin/ufr"
 MANIFEST_FILES=(
     "ufr.dlogic.chrome.json"
