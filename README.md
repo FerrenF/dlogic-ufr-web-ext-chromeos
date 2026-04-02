@@ -61,6 +61,8 @@ The script expects Python3 to be available. This should be true on most chromeOS
 ```
 # From repository root
 chmod +x install-chromium-chromeos.sh
+
+# Pasted in to an arbitrary script
 ./install-chromium-chromeos.sh
 ```
 This should be everything you need to do in the container. 
