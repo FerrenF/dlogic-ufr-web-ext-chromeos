@@ -7,7 +7,6 @@ Hi there, if you are having trouble getting D-Logic's web extensions, [Found Her
 
 Current Extension ID: kjfmmgpfhdohhcodbkaodgkidbenkgog
 
-
 # Normal Installation
 
 There are actually two steps to the installation of the web extension, even from the store.
@@ -41,6 +40,23 @@ Click this submenu Linux Development Environment -> Manage USB devices -> The RF
 
 In Linux Development Environment -> Manage USB devices -> Toggle the device showing your RFID reader's model name on.
 Go back to your terminal
+
+
+# Choice: Manual or Script
+## Script
+
+The script expect Python3 to be available. This should be true on most chromeOS installations. If the repo is current, then it should work out of the box. If not, then the extension ID may need to be adjusted.
+
+## 3. Run the script
+
+```
+# From repository root
+chmod +x install-chromium-chromeos.sh
+./install-chromium-chromeos.sh
+```
+
+
+## Manual
 
 ## 3. Install Chromium
 
@@ -103,3 +119,6 @@ Finally, copy the extension host executable to the file mentioned in the manifes
 cp ufr-browser_extensions/Chrome/Host/Linux/x86_64/ufr /usr/local/bin/
 chmod +x+r /usr/local/bin/ufr
 ```
+
+Restart the chromium browser if you haven't.
+
